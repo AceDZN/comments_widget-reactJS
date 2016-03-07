@@ -1,10 +1,11 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var NewCommentForm = require('./components/new-comment-form');
 
 var WidgetWrap = React.createClass({
   render: function() {
     return (<div className="widget_wrap">
-      NEW COMMENT FORM
+      <NewCommentForm />
       </div>);
   }
 });
