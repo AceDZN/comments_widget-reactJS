@@ -1,4 +1,5 @@
 var React = require('react');
+var Gravatar = require('./avatar');
 
 module.exports = React.createClass({
   getInitialState: function(){
@@ -13,7 +14,7 @@ module.exports = React.createClass({
     return (
       <div className={"comment-block "+this.state.commentClass}>
         <div className="comment-avatar">
-          <img alt={this.state.author} />
+          <Gravatar email={this.state.author} />
         </div>
         <div className="comment">
           <div className="author">

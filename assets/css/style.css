@@ -54,7 +54,7 @@ body {
 
 .widget_wrap {
   margin: auto;
-  max-width: 350px;
+  max-width: 600px;
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -96,6 +96,11 @@ form.add-comment {
     form.add-comment button.submit:disabled {
       background: #E2E2E2;
       color: #BBB; }
+      form.add-comment button.submit:disabled:hover {
+        text-shadow: 0px 0px 5px #fff;
+        box-shadow: inset 0px 0px 3px #fff;
+        -moz-box-shadow: inset 0px 0px 3px #fff;
+        -webkit-box-shadow: inset 0px 0px 3px #fff; }
     form.add-comment button.submit:hover {
       text-shadow: 0px 0px 5px #000;
       box-shadow: inset 0px 0px 3px #000;
