@@ -1,5 +1,8 @@
 var React = require('react');
 var CommentItem = require('./comment-item');
+var FilterBlock = require('./filter-block');
+var NoResults = require('./no-results');
+var CommentsStore = require('../stores/comments-store');
 
 module.exports = React.createClass({
   getInitialState: function(){
@@ -8,28 +11,49 @@ module.exports = React.createClass({
     }
   },
   render: function(){
-    return this.renderList()
+    return this.renderWrapper()
   },
-  renderList: function(){
-      if(this.props.comments && Object.keys(this.props.comments).length === 0){
-        return (
-          <div>NONE</div>
-        );
-      } else {
-        var children = [];
-        for (var key in this.props.comments ){
-          children.push(
-            <CommentItem comment={this.props.comments[key]} key={this.props.comments[key].id} />
-          )
-        }
+  renderWrapper: function(){
+    if(this.state.comments && Object.keys(this.state.comments).length === 0 && !CommentsStore.getFilter()){
+      return null
+    } else {
         return (
           <div className="comments_wrap">
-              <div className={"comment-list "+this.setCommentListClass()}>
-                {children}
-              </div>
+              {this.renderList()}
           </div>
-        );
-      }
+        )
+    }
+
+  },
+
+
+  renderList: function(){
+
+        var children = [];
+        for (var key in this.state.comments ){
+          children.push(
+            <CommentItem comment={this.state.comments[key]} key={this.state.comments[key].id} />
+          )
+        }
+        if(children.length < 1){
+          return (
+            <div>
+              <FilterBlock onFilter={this.filterComments} />
+              <div className={"comment-list "+this.setCommentListClass()}>
+                <NoResults filterString={CommentsStore.getFilter()} />
+              </div>
+            </div>
+          )
+        } else {
+          return (
+            <div>
+              <FilterBlock onFilter={this.filterComments} />
+              <div className={"comment-list "+this.setCommentListClass()}>
+              {children}
+              </div>
+            </div>
+          );
+        }
     },
     setCommentListClass: function(){
       if(this.props.comments.length <=1){
@@ -37,5 +61,10 @@ module.exports = React.createClass({
       } else {
         return "list"
       }
+    },
+    filterComments: function(e){
+      this.setState({
+        comments: CommentsStore.GetFilteredComments()
+      })
     }
 });
