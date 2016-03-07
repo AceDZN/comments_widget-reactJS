@@ -22110,7 +22110,7 @@ module.exports = React.createClass({displayName: "exports",
     hash  = email.trim();
     hash = hash.toLowerCase();
     hash = md5(hash);
-    return (gravatarUrl + hash + '?s=');
+    return (gravatarUrl + hash + '?s='+size);
   }
 });
 
@@ -22132,7 +22132,7 @@ module.exports = React.createClass({displayName: "exports",
     return (
       React.createElement("div", {className: "comment-block "+this.state.commentClass}, 
         React.createElement("div", {className: "comment-avatar"}, 
-          React.createElement(Gravatar, {email: this.state.author})
+          React.createElement(Gravatar, {size: "250", email: this.state.author})
         ), 
         React.createElement("div", {className: "comment"}, 
           React.createElement("div", {className: "author"}, 

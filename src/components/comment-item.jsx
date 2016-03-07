@@ -14,7 +14,7 @@ module.exports = React.createClass({
     return (
       <div className={"comment-block "+this.state.commentClass}>
         <div className="comment-avatar">
-          <Gravatar email={this.state.author} />
+          <Gravatar size="250" email={this.state.author} />
         </div>
         <div className="comment">
           <div className="author">

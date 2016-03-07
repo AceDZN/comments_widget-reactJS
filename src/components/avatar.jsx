@@ -20,6 +20,6 @@ module.exports = React.createClass({
     hash  = email.trim();
     hash = hash.toLowerCase();
     hash = md5(hash);
-    return (gravatarUrl + hash + '?s=');
+    return (gravatarUrl + hash + '?s='+size);
   }
 });
