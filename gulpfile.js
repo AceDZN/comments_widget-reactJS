@@ -54,7 +54,7 @@ function bundle() {
     .bundle()
     .on('error', notify)
     .pipe(source('main.js'))
-    .pipe(gulp.dest('./assets/'));
+    .pipe(gulp.dest('./assets/js/'));
 }
 bundler.on('update', bundle);
 
