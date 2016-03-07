@@ -61,7 +61,7 @@ bundler.on('update', bundle);
 
 gulp.task('compress', function() {
 
-   return gulp.src('main.js')
+   return gulp.src('./assets/js/main.js')
      .pipe(uglify().on('error', notify))
      .pipe(rename({suffix:'.min'}))
      .pipe(gulp.dest('./assets/js/'));
