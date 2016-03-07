@@ -18,7 +18,7 @@ module.exports = React.createClass({
   },
   render: function(){
     return (
-      <form className="add-comment" onSubmit={this.handleSubmit} name="commentForm" novalidate="novalidate" >
+      <form className="add-comment" onSubmit={this.handleSubmit} name="commentForm" noValidate="novalidate" >
         <input value={this.state.email} className={this.state.emailClass} type="email" placeholder="Email" onChange={this.handleEmailChange} />
         <textarea value={this.state.message} className={this.state.messageClass} placeholder="Message" onChange={this.handleMessageChange}>
         </textarea>
@@ -71,10 +71,11 @@ module.exports = React.createClass({
   },
   handleSubmit: function(e){
     e.preventDefault();
-    CommentsStore.addComment({
+    CommentsStore.AddComment({
       email:this.state.email,
       message: this.state.message
     });
+    this.props.onCommentAdd();
     this.setState(defaultState);
   }
 });
