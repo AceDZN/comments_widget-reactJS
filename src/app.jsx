@@ -6,6 +6,7 @@ var CommentsStore = require('./stores/comments-store');
 var NewCommentForm = require('./components/new-comment-form');
 var CommentsList = require('./components/comments-list');
 
+var AceLogo = require('./components/ace-logo');
 
 var defaultComments = [
   {id: 1,author: "design@acedzn.com",content: "Hola Amigoz, this is my Comment widget for the Big Panda Exercise"},
@@ -22,10 +23,14 @@ var WidgetWrap = React.createClass({
   },
   render: function() {
     return (
-      <div className="widget_wrap">
-        <NewCommentForm onCommentAdd={this.onCommentAdd} />
-        <CommentsList comments={this.state.comments} />
+      <div>
+        <div className="widget_wrap">
+          <NewCommentForm onCommentAdd={this.onCommentAdd} />
+          <CommentsList comments={this.state.comments} />
+        </div>
+        <AceLogo />
       </div>
+
     );
   },
   onCommentAdd: function(){
