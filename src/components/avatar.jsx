@@ -14,12 +14,11 @@ module.exports = React.createClass({
   },
   getAvatarUrl: function(){
     var gravatarUrl = 'http://gravatar.com/avatar/';
-    var size = this.state.size.toString()
     var hash;
     var email = this.state.email;
     hash  = email.trim();
     hash = hash.toLowerCase();
     hash = md5(hash);
-    return (gravatarUrl + hash + '?s='+size);
+    return (gravatarUrl + hash + '?size=' + this.state.size.toString());
   }
 });
