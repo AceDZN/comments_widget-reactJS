@@ -46,7 +46,6 @@
   float:none;
 }
 body {
-  padding:40px;
   background-color: #f9f9f9;
   color: #000;
   font-size: 16px;
@@ -55,6 +54,12 @@ body {
   line-height: 1.4;
   z-index: 0;
   cursor: default;
+}
+h1.page_title{
+  text-align: center;
+  font-size: 30px;
+  line-height: 100px;
+  color: #7DA1D1;
 }
 .widget_wrap{
   margin:auto;

@@ -10,10 +10,10 @@ var CommentsList = require('./components/comments-list');
 var AceLogo = require('./components/ace-logo');
 
 var defaultComments = [
-  {id: 1,author: "design@acedzn.com",content: "Hola Amigoz, this is my Comment widget for the Big Panda Exercise"},
-  {id: 2,author: "elik@bigpanda.io",content: "Hello there. How are you?"},
-  {id: 3,author: "Shai@bigpanda.io",content: "Good!!!"},
-  {id: 4,author: "noam@bigpanda.io",content: "Goodbye :)"}
+  {id: 1,author: "design@acedzn.com",content: "Hola Amigoz, this is my ReactJS Comment widget"},
+  {id: 2,author: "alex@acedzn.com",content: "Hello there. How are you?"},
+  {id: 3,author: "another@brother.io",content: "Good!!!"},
+  {id: 4,author: "design@acedzn.com",content: "Goodbye :)"}
 ];
 
 var WidgetWrap = React.createClass({displayName: "WidgetWrap",

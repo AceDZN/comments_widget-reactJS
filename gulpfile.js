@@ -66,7 +66,8 @@ gulp.task('compress', function() {
      .pipe(rename({suffix:'.min'}))
      .pipe(gulp.dest('./assets/js/'));
  });
-gulp.watch('main.js', ['compress']);
+
+gulp.watch('./assets/js/main.js', ['compress']);
 
 
 
