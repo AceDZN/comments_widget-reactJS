@@ -12,7 +12,7 @@ module.exports = React.createClass({
   },
   render: function(){
     return (
-      <div className={"comment-block "+this.state.commentClass}>
+      <div className={this.state.commentClass}>
         <div className="comment-avatar">
           <Gravatar size="250" email={this.state.author} />
         </div>

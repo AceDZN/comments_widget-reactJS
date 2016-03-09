@@ -124,7 +124,8 @@ form.add-comment {
   padding-left: 32px; }
 
 .comments_wrap {
-  padding: 20px; }
+  padding: 20px;
+  transition: all 500ms ease-in; }
 
 .comment-block {
   font-size: 14px;
@@ -146,6 +147,24 @@ form.add-comment {
       font-weight: 600; }
     .comment-block .comment .content {
       line-height: normal; }
+
+.results-enter {
+  opacity: 0;
+  max-height: 0; }
+
+.results-enter.results-enter-active {
+  opacity: 1;
+  max-height: 100px;
+  transition: all 500ms ease-in; }
+
+.results-leave {
+  opacity: 1;
+  max-height: 100px; }
+
+.results-leave.results-leave-active {
+  opacity: 0;
+  max-height: 0;
+  transition: all 300ms ease-in; }
 
 .comment-avatar {
   flex-shrink: 0; }

@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 var CommentItem = require('./comment-item');
 var FilterBlock = require('./filter-block');
 var NoResults = require('./no-results');
@@ -32,7 +33,7 @@ module.exports = React.createClass({
         var children = [];
         for (var key in this.state.comments ){
           children.push(
-            <CommentItem comment={this.state.comments[key]} key={this.state.comments[key].id} />
+            <CommentItem className="comment-block" comment={this.state.comments[key]} key={this.state.comments[key].id} />
           )
         }
         if(children.length < 1){
@@ -40,7 +41,9 @@ module.exports = React.createClass({
             <div>
               <FilterBlock onFilter={this.filterComments} />
               <div className={"comment-list "+this.setCommentListClass()}>
-                <NoResults filterString={CommentsStore.getFilter()} />
+                <ReactCSSTransitionGroup transitionName="results" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                  <NoResults filterString={CommentsStore.getFilter()} />
+                </ReactCSSTransitionGroup>
               </div>
             </div>
           )
@@ -49,7 +52,9 @@ module.exports = React.createClass({
             <div>
               <FilterBlock onFilter={this.filterComments} />
               <div className={"comment-list "+this.setCommentListClass()}>
-              {children}
+                <ReactCSSTransitionGroup transitionName="results" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                  {children}
+                </ReactCSSTransitionGroup>
               </div>
             </div>
           );
