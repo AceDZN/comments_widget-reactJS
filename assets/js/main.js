@@ -22926,14 +22926,15 @@ var CommentsStore = require('../stores/comments-store');
 module.exports = React.createClass({displayName: "exports",
   getInitialState: function(){
     return {
-      comments: this.props.comments || []
+      comments: CommentsStore.GetComments()
     }
   },
   render: function(){
+
     return this.renderWrapper()
   },
   renderWrapper: function(){
-    if(this.state.comments && Object.keys(this.state.comments).length === 0 && !CommentsStore.getFilter()){
+    if(CommentsStore.GetComments() && Object.keys(CommentsStore.GetComments()).length === 0 && !CommentsStore.getFilter()){
       return null
     } else {
         return (
@@ -22947,11 +22948,11 @@ module.exports = React.createClass({displayName: "exports",
 
 
   renderList: function(){
-
+        var comments = CommentsStore.GetComments();
         var children = [];
-        for (var key in this.state.comments ){
+        for (var key in comments ){
           children.push(
-            React.createElement(CommentItem, {className: "comment-block", comment: this.state.comments[key], key: this.state.comments[key].id})
+            React.createElement(CommentItem, {className: "comment-block", comment: comments[key], key: comments[key].id})
           )
         }
         if(children.length < 1){
@@ -22979,7 +22980,7 @@ module.exports = React.createClass({displayName: "exports",
         }
     },
     setCommentListClass: function(){
-      if(this.props.comments.length <=1){
+      if(CommentsStore.GetComments().length <=1){
         return "no_list"
       } else {
         return "list"
@@ -22987,7 +22988,7 @@ module.exports = React.createClass({displayName: "exports",
     },
     filterComments: function(e){
       this.setState({
-        comments: CommentsStore.GetFilteredComments()
+        comments: CommentsStore.GetComments()
       })
     }
 });
@@ -23017,7 +23018,9 @@ module.exports = React.createClass({displayName: "exports",
       filterString:event.target.value
     });
     CommentsStore.setFilter(event.target.value);
-    this.props.onFilter();
+    if(this.props.onFilter){
+      this.props.onFilter();
+    }
   }
 });
 
@@ -23136,8 +23139,16 @@ var _ = require('underscore');
 
 module.exports = Reflux.createStore({
   comments: [],
+  filter: "",
   GetComments: function(){
-    return this.comments;
+    var searchStr=this.filter.toString().toLowerCase();
+    var results = _.filter(this.comments, function (obj) {
+        return _.values(obj).some(function (el) {
+            return el.toString().toLowerCase().indexOf(searchStr) > -1;
+        });
+    });
+
+    return results
   },
   SetComments: function(comments){
     this.comments = comments
@@ -23157,16 +23168,6 @@ module.exports = Reflux.createStore({
   },
   getFilter: function(){
     return this.filter
-  },
-  GetFilteredComments: function(){
-    var searchStr=this.filter.toString().toLowerCase();
-    var results = _.filter(this.comments, function (obj) {
-        return _.values(obj).some(function (el) {
-            return el.toString().toLowerCase().indexOf(searchStr) > -1;
-        });
-    });
-
-    return results
   }
 });
 

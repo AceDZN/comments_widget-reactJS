@@ -3,8 +3,16 @@ var _ = require('underscore');
 
 module.exports = Reflux.createStore({
   comments: [],
+  filter: "",
   GetComments: function(){
-    return this.comments;
+    var searchStr=this.filter.toString().toLowerCase();
+    var results = _.filter(this.comments, function (obj) {
+        return _.values(obj).some(function (el) {
+            return el.toString().toLowerCase().indexOf(searchStr) > -1;
+        });
+    });
+
+    return results
   },
   SetComments: function(comments){
     this.comments = comments
@@ -24,15 +32,5 @@ module.exports = Reflux.createStore({
   },
   getFilter: function(){
     return this.filter
-  },
-  GetFilteredComments: function(){
-    var searchStr=this.filter.toString().toLowerCase();
-    var results = _.filter(this.comments, function (obj) {
-        return _.values(obj).some(function (el) {
-            return el.toString().toLowerCase().indexOf(searchStr) > -1;
-        });
-    });
-
-    return results
   }
 });

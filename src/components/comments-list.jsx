@@ -8,14 +8,15 @@ var CommentsStore = require('../stores/comments-store');
 module.exports = React.createClass({
   getInitialState: function(){
     return {
-      comments: this.props.comments || []
+      comments: CommentsStore.GetComments()
     }
   },
   render: function(){
+
     return this.renderWrapper()
   },
   renderWrapper: function(){
-    if(this.state.comments && Object.keys(this.state.comments).length === 0 && !CommentsStore.getFilter()){
+    if(CommentsStore.GetComments() && Object.keys(CommentsStore.GetComments()).length === 0 && !CommentsStore.getFilter()){
       return null
     } else {
         return (
@@ -29,11 +30,11 @@ module.exports = React.createClass({
 
 
   renderList: function(){
-
+        var comments = CommentsStore.GetComments();
         var children = [];
-        for (var key in this.state.comments ){
+        for (var key in comments ){
           children.push(
-            <CommentItem className="comment-block" comment={this.state.comments[key]} key={this.state.comments[key].id} />
+            <CommentItem className="comment-block" comment={comments[key]} key={comments[key].id} />
           )
         }
         if(children.length < 1){
@@ -61,7 +62,7 @@ module.exports = React.createClass({
         }
     },
     setCommentListClass: function(){
-      if(this.props.comments.length <=1){
+      if(CommentsStore.GetComments().length <=1){
         return "no_list"
       } else {
         return "list"
@@ -69,7 +70,7 @@ module.exports = React.createClass({
     },
     filterComments: function(e){
       this.setState({
-        comments: CommentsStore.GetFilteredComments()
+        comments: CommentsStore.GetComments()
       })
     }
 });

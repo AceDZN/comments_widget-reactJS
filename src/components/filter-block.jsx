@@ -21,6 +21,8 @@ module.exports = React.createClass({
       filterString:event.target.value
     });
     CommentsStore.setFilter(event.target.value);
-    this.props.onFilter();
+    if(this.props.onFilter){
+      this.props.onFilter();
+    }
   }
 });
