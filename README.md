@@ -18,3 +18,6 @@ Click [here](https://github.com/AceDZN/comments_widget-reactJS/releases) then do
 	> npm install
 	> gulp
 ```
+
+
+<img src="http://www.acedzn.com/assets/img/icons/android-icon-57x57.png">
